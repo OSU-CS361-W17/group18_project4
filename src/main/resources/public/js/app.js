@@ -32,6 +32,7 @@ function placeShip() {
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
    });
+
 }
 
 
@@ -57,6 +58,8 @@ function fire(){
      alert( "Request failed: " + textStatus );
    });
 
+   
+
 }
 
 function log(logContents){
@@ -64,8 +67,8 @@ function log(logContents){
 }
 
 function displayGameState(gameModel){
-$( '#MyBoard td'  ).css("background-color", "blue");
-$( '#TheirBoard td'  ).css("background-color", "blue");
+$( '#MyBoard td'  ).css("background-color", "green");
+$( '#TheirBoard td'  ).css("background-color", "red");
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);

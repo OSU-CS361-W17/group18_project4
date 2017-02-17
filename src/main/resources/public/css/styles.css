@@ -4,25 +4,14 @@ body {
     padding: 0;
 }
 
-.gameBoard{
-/*with:100px;
-height:100px;*/
-background-color: light-gray;
-}
 
-.gameBoard td {
-width: 40px;
-height:40px;
-background-color:blue;
-}
+
+
 
 table, th, td {
-   border: 1px solid black;
+    border: 1px solid #f0ffff;
 }
 
-#MyBoard .ship{
-background-color: orange;
-}
 
 /*
 button {
