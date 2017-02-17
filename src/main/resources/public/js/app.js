@@ -1,4 +1,5 @@
 var gameModel;
+var place = 0;
 
 $( document ).ready(function() {
   // Handler for .ready() called.
@@ -32,10 +33,18 @@ function placeShip() {
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
    });
+  place = 1;
 }
 
 
 function fire(){
+  
+   //check if plase ship
+    if(place != 1){
+        alert("You didn't place any ship!");
+        return;
+    }
+  
  console.log($( "#rowFire" ).val());
  console.log($( "#colFire" ).val());
 //var menuId = $( "ul.nav" ).first().attr( "id" );
