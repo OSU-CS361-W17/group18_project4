@@ -5,11 +5,26 @@ import spark.Request;
 
 import java.io.UnsupportedEncodingException;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.staticFiles;
+import static spark.Spark.*;
 
 public class Main {
+
+
+    public static void main(String[] args) {
+        port(4000);
+        //This will allow us to server the static pages such as index.html, app.js, etc.
+        staticFiles.location("/public");
+
+        //This will listen to GET requests to /model and return a clean new model
+        get("/model", (req, res) -> newModel());
+        //This will listen to POST requests and expects to receive a game model, as well as location to fire to
+        post("/fire/:row/:col", (req, res) -> fireAt(req));
+        //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
+        post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
+    }
+
+/*
+
 
     public static void main(String[] args) {
         //This is for debugging purposes
@@ -30,7 +45,7 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
     }
-
+*/
     //This function returns a new model
     private static String newModel() {
         BattleshipModel bm = new BattleshipModel();
