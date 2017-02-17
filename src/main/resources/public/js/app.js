@@ -77,8 +77,9 @@ function log(logContents){
 }
 
 function displayGameState(gameModel){
-$( '#MyBoard td'  ).css("background-color", "green");
-$( '#TheirBoard td'  ).css("background-color", "red");
+//$( '#MyBoard td'  ).css("background-color", "blue");
+//$( '#TheirBoard td'  ).css("background-color", "blue");
+
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
