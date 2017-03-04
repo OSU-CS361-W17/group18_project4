@@ -25,18 +25,15 @@ public class BaseShip {
         start = s;
         end = e;
     }
-    
-
 
     public Coordinate getStart() {
-		return start;
-	}
-
-   
-    
+        return start;
+    }
     public Coordinate getEnd() {
-		return end;
-	}
+        return end;
+    }
+
+
 
     public List<Coordinate> covers(Coordinate test) {
     	 if(start.getAcross() == end.getAcross()){

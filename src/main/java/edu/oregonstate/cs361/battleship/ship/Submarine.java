@@ -9,7 +9,7 @@ public class Submarine extends MilitaryShip {
 	}
 
 	@Override
-    public boolean scan(Coordinate test) {
-    	return false;
-    }
+	public boolean scan(Coordinate test) {
+		return false;
+	}
 }
