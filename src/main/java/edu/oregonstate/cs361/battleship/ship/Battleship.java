@@ -7,4 +7,9 @@ public class Battleship extends MilitaryShip {
     public Battleship(Coordinate s, Coordinate e) {
 		super("battleship",4, s, e);
 	}
+
+	@Override
+    public boolean scan(Coordinate test) {
+    	return false;
+    }
 }
