@@ -1,11 +1,8 @@
 package edu.oregonstate.cs361.battleship.ship;
-
 import edu.oregonstate.cs361.battleship.Coordinate;
-import org.junit.jupiter.api.Test;
-
 import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by Yingshi on 3/3/2017.

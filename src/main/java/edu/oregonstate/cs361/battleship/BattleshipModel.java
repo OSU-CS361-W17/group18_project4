@@ -1,9 +1,7 @@
 package edu.oregonstate.cs361.battleship;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import edu.oregonstate.cs361.battleship.ship.AircraftCarrier;
@@ -13,7 +11,9 @@ import edu.oregonstate.cs361.battleship.ship.Clipper;
 import edu.oregonstate.cs361.battleship.ship.Dinghy;
 import edu.oregonstate.cs361.battleship.ship.Submarine;
 
-
+/**
+ * Created by michaelhilton on 1/4/17.
+ */
 public class BattleshipModel {
 
     private AircraftCarrier aircraftCarrier = new AircraftCarrier(new Coordinate(0, 0), new Coordinate(0, 0));
@@ -39,6 +39,8 @@ public class BattleshipModel {
         computerHits = new ArrayList<>();
         computerMisses= new ArrayList<>();
     }
+
+    
 
     public BaseShip getShip(String shipName) {
         if (shipName.equalsIgnoreCase("aircraftcarrier")) {
@@ -90,6 +92,7 @@ public class BattleshipModel {
     }
 
     public void shootAtComputer(int row, int col) {
+
         Coordinate coor = new Coordinate(row,col);
 
         List<Coordinate> covers = new ArrayList<>(); 
@@ -103,51 +106,44 @@ public class BattleshipModel {
             computerMisses.add(coor);
         }
         else {
-
             computerHits.addAll(covers);
         }
     }
 
+
     public void scanAt(int row, int col) {
         Coordinate coor = new Coordinate(row,col);
+        List<Coordinate> covers = new ArrayList<>();
         System.out.println(row);
         System.out.println(col);
 
         if(computer_aircraftCarrier.scan(coor) || computer_clipper.scan(coor) || computer_dinghy.scan(coor) || computer_battleship.scan(coor) || computer_submarine.scan(coor)){
-            computerHits.add(coor);
-        }
-        else{
-            computerMisses.add(coor);
-        }
+            computerHits.add(coor);}
+        else{computerMisses.add(coor);}
 
         coor = new Coordinate(row+1,col);
         if(computer_aircraftCarrier.scan(coor) || computer_clipper.scan(coor) || computer_dinghy.scan(coor) || computer_battleship.scan(coor) || computer_submarine.scan(coor)){
-            computerHits.add(coor);
-        }
-        else{
-            computerMisses.add(coor);
-        }
+            computerHits.add(coor);}
+        else{computerMisses.add(coor);}
+
         coor = new Coordinate(row-1,col);
         if(computer_aircraftCarrier.scan(coor) || computer_clipper.scan(coor) || computer_dinghy.scan(coor) || computer_battleship.scan(coor) || computer_submarine.scan(coor)){
-            computerHits.add(coor);
-        }
-        else{
-            computerMisses.add(coor);
-        }
+            computerHits.add(coor);}
+        else{computerMisses.add(coor);}
+
         coor = new Coordinate(row,col+1);
         if(computer_aircraftCarrier.scan(coor) || computer_clipper.scan(coor) || computer_dinghy.scan(coor) || computer_battleship.scan(coor) || computer_submarine.scan(coor)){
-            computerHits.add(coor);
-        }
-        else{
-            computerMisses.add(coor);
-        }
+            computerHits.add(coor);}
+        else{computerMisses.add(coor);}
+
         coor = new Coordinate(row,col-1);
         if(computer_aircraftCarrier.scan(coor) || computer_clipper.scan(coor) || computer_dinghy.scan(coor) || computer_battleship.scan(coor) || computer_submarine.scan(coor)){
-            computerHits.add(coor);
-        }
-        else{
-            computerMisses.add(coor);
-        }
+            computerHits.add(coor);}
+        else{computerMisses.add(coor);}
+
+
+
+
 
     }
 
@@ -157,23 +153,14 @@ public class BattleshipModel {
         Random random = new Random();
         int randRow = random.nextInt(max - min + 1) + min;
         int randCol = random.nextInt(max - min + 1) + min;
-
         Coordinate coor = new Coordinate(randRow,randCol);
-        if(playerMisses.contains(coor)){
-           // System.out.println("Dupe");
-        }
-
         List<Coordinate> covers = new ArrayList<>(); 
         covers.addAll(aircraftCarrier.covers(coor));
         covers.addAll(battleship.covers(coor));
         covers.addAll(dinghy.covers(coor));
         covers.addAll(clipper.covers(coor));
         covers.addAll(submarine.covers(coor));
-        
-        if (covers.isEmpty()) {
-            playerMisses.add(coor);
-        } else {
-            playerHits.addAll(covers);
-        }
+        if (covers.isEmpty()) {playerMisses.add(coor);}
+        else {playerHits.addAll(covers);}
     }
 }
