@@ -144,7 +144,7 @@ label[for='toggle-all'] {
 }
 
 #toggle-all:before {
-    content: '❯';
+    content: '鉂�';
     font-size: 22px;
     color: #e6e6e6;
     padding: 10px 27px 10px 27px;
@@ -240,7 +240,7 @@ label[for='toggle-all'] {
 }
 
 #todo-list li .destroy:after {
-    content: '×';
+    content: '脳';
 }
 
 #todo-list li:hover .destroy {

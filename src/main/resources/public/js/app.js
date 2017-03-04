@@ -72,6 +72,40 @@ function fire(){
 
 }
 
+
+function scan(){
+  
+   //check if plase ship
+    if(place != 1){
+        alert("You didn't place any ship!");
+        return;
+    }
+  
+ console.log($( "#rowFire" ).val());
+ console.log($( "#colFire" ).val());
+//var menuId = $( "ul.nav" ).first().attr( "id" );
+   var request = $.ajax({
+     url: "/scan/"+$( "#rowFire" ).val()+"/"+$( "#colFire" ).val(),
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
+
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+   
+
+}
+
 function log(logContents){
     console.log(logContents);
 }
@@ -80,12 +114,11 @@ function displayGameState(gameModel){
 //$( '#MyBoard td'  ).css("background-color", "blue");
 //$( '#TheirBoard td'  ).css("background-color", "blue");
 
-
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
-displayShip(gameModel.cruiser);
-displayShip(gameModel.destroyer);
 displayShip(gameModel.submarine);
+displayShip(gameModel.clipper);
+displayShip(gameModel.dinghy);
 
 for (var i = 0; i < gameModel.computerMisses.length; i++) {
    $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-color", "blue");
