@@ -67,44 +67,33 @@ function fire(){
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
    });
-
-   
-
 }
 
-
 function scan(){
-  
-   //check if plase ship
+$( '#TheirBoard td'  ).css("background-color", "red");
+$( '#TheirBoard #' + 'hitbg'  ).css("background-color", "yellow");
+$( '#TheirBoard #' +  'missbg'  ).css("background-color", "blue");
+$( '#TheirBoard #' +  'scanbg'  ).css("background-color", "#ACFA58");
+$( '#TheirBoard #' +  'failbg'  ).css("background-color", "#F8E0E0");
+$( '#TheirBoard #' +  'same'  ).css("background-color", "#f0ffff");
+
     if(place != 1){
         alert("You didn't place any ship!");
         return;
     }
-  
- console.log($( "#rowFire" ).val());
- console.log($( "#colFire" ).val());
-//var menuId = $( "ul.nav" ).first().attr( "id" );
-   var request = $.ajax({
-     url: "/scan/"+$( "#rowFire" ).val()+"/"+$( "#colFire" ).val(),
-     method: "post",
-     data: JSON.stringify(gameModel),
-     contentType: "application/json; charset=utf-8",
-     dataType: "json"
-   });
+    var scanRow = $( "#rowFire" ).val();
+    var scanCol = $( "#colFire" ).val();
+    console.log("input " + scanRow);
+    console.log("input " + scanCol);
 
-   request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
-
-   });
-
-   request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
-   });
-
-   
+    scanShip(scanRow, scanCol);
+    scanShip(parseInt(scanRow)+1, scanCol);
+    scanShip(scanRow - 1, scanCol);
+    scanShip(scanRow, parseInt(scanCol)+1);
+    scanShip(scanRow, scanCol - 1);
 
 }
+
 
 function log(logContents){
     console.log(logContents);
@@ -112,7 +101,13 @@ function log(logContents){
 
 function displayGameState(gameModel){
 //$( '#MyBoard td'  ).css("background-color", "blue");
-//$( '#TheirBoard td'  ).css("background-color", "blue");
+$( '#TheirBoard td'  ).css("background-color", "red");
+$( '#TheirBoard #' + 'hitbg'  ).css("background-color", "yellow");
+$( '#TheirBoard #' +  'missbg'  ).css("background-color", "blue");
+$( '#TheirBoard #' +  'scanbg'  ).css("background-color", "#ACFA58");
+$( '#TheirBoard #' +  'failbg'  ).css("background-color", "#F8E0E0");
+$( '#TheirBoard #' +  'same'  ).css("background-color", "#f0ffff");
+
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
@@ -133,12 +128,88 @@ for (var i = 0; i < gameModel.playerMisses.length; i++) {
 for (var i = 0; i < gameModel.playerHits.length; i++) {
    $( '#MyBoard #' + gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down ).css("background-color", "red");
 }
-
-
-
 }
 
 
+function scanShip(row, col){
+ console.log("row " + row);
+ console.log("col " + col);
+ startCoordAcross = gameModel.computer_aircraftCarrier.start.Across;
+ startCoordDown = gameModel.computer_aircraftCarrier.start.Down;
+ endCoordAcross = gameModel.computer_aircraftCarrier.end.Across;
+ endCoordDown = gameModel.computer_aircraftCarrier.end.Down;
+
+     if(startCoordAcross == endCoordAcross){        
+         for (i = startCoordDown; i <= endCoordDown; i++) {
+             if(startCoordAcross == row && i == col){
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#ACFA58");
+             return;
+             }
+             else
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#F8E0E0");
+         }
+     } else {                                       
+         for (i = startCoordAcross; i <= endCoordAcross; i++) {
+             if(i == row && startCoordDown == col){
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#ACFA58");
+             return;
+             }
+             else
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#F8E0E0");
+         }
+     }
+
+ startCoordAcross = gameModel.computer_clipper.start.Across;
+ startCoordDown = gameModel.computer_clipper.start.Down;
+ endCoordAcross = gameModel.computer_clipper.end.Across;
+ endCoordDown = gameModel.computer_clipper.end.Down;
+
+     if(startCoordAcross == endCoordAcross){        //垂直
+         for (i = startCoordDown; i <= endCoordDown; i++) {
+             if(startCoordAcross == row && i == col){
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#ACFA58");
+             return;
+             }
+             else
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#F8E0E0");
+         }
+     } else {                                       //水平
+         for (i = startCoordAcross; i <= endCoordAcross; i++) {
+             if(i == row && startCoordDown == col){
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#ACFA58");
+             return;
+             }
+             else
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#F8E0E0");
+         }
+     }
+
+ startCoordAcross = gameModel.computer_dinghy.start.Across;
+ startCoordDown = gameModel.computer_dinghy.start.Down;
+ endCoordAcross = gameModel.computer_dinghy.end.Across;
+ endCoordDown = gameModel.computer_dinghy.end.Down;
+
+     if(startCoordAcross == endCoordAcross){        //垂直
+         for (i = startCoordDown; i <= endCoordDown; i++) {
+             if(startCoordAcross == row && i == col){
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#ACFA58");
+             return;
+             }
+             else
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#F8E0E0");
+         }
+     } else {                                       //水平
+         for (i = startCoordAcross; i <= endCoordAcross; i++) {
+             if(i == row && startCoordDown == col){
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#ACFA58");
+             return;
+             }
+             else
+             $( '#TheirBoard #'+row+'_'+col  ).css("background-color", "#F8E0E0");
+         }
+     }
+
+}
 
 function displayShip(ship){
  startCoordAcross = ship.start.Across;
@@ -157,7 +228,4 @@ function displayShip(ship){
         }
     }
  }
-
-
-
 }
