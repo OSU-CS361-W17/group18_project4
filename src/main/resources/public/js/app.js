@@ -14,6 +14,9 @@ function placeShip() {
    console.log($( "#rowSelec" ).val());
    console.log($( "#colSelec" ).val());
    console.log($( "#orientationSelec" ).val());
+   console.log("difficulty in place js " + $( "#difficultySelec" ).val());
+   
+   gameModel['difficulty'] = $( "#difficultySelec" ).val();
 
    //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
@@ -49,6 +52,7 @@ function fire(){
   
  console.log($( "#rowFire" ).val());
  console.log($( "#colFire" ).val());
+ gameModel['difficulty'] = $( "#difficultySelec" ).val();
 //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
      url: "/fire/"+$( "#rowFire" ).val()+"/"+$( "#colFire" ).val(),
@@ -100,8 +104,13 @@ function log(logContents){
 }
 
 function displayGameState(gameModel){
-//$( '#MyBoard td'  ).css("background-color", "blue");
+$( '#MyBoard td'  ).css("background-color", "#7fff00");
 $( '#TheirBoard td'  ).css("background-color", "red");
+$( '#MyBoard #' + 'placed'  ).css("background-color", "yellow");
+$( '#MyBoard #' +  'miss'  ).css("background-color", "green");
+$( '#MyBoard #' +  'hit'  ).css("background-color", "red");
+$( '#MyBoard #' +  'same'  ).css("background-color", "#f0ffff");
+
 $( '#TheirBoard #' + 'hitbg'  ).css("background-color", "yellow");
 $( '#TheirBoard #' +  'missbg'  ).css("background-color", "blue");
 $( '#TheirBoard #' +  'scanbg'  ).css("background-color", "#ACFA58");
