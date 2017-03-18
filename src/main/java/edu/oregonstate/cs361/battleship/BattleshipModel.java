@@ -11,9 +11,7 @@ import edu.oregonstate.cs361.battleship.ship.Clipper;
 import edu.oregonstate.cs361.battleship.ship.Dinghy;
 import edu.oregonstate.cs361.battleship.ship.Submarine;
 
-/**
- * Created by michaelhilton on 1/4/17.
- */
+
 public class BattleshipModel {
 
     private AircraftCarrier aircraftCarrier = new AircraftCarrier(new Coordinate(0, 0), new Coordinate(0, 0));
