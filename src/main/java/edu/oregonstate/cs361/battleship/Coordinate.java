@@ -19,5 +19,30 @@ public class Coordinate {
         return Across;
     }
 
+    @Override
+    public int hashCode() {
+    	return Across * 10000 + Down;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj instanceof Coordinate) {
+    		if (obj.hashCode() == this.hashCode()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} else {
+    		return false;
+    	}
+    }
+    
+    public boolean isLegal() {
+    	if (Across > 10) return false;
+    	if (Across < 1) return false;
+    	if (Down > 10) return false;
+    	if (Down < 1) return false;
+    	return true;
+    }
     
 }
