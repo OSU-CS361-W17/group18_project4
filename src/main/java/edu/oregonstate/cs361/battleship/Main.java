@@ -22,7 +22,6 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
 
-        post("/scan/:row/:col", (req, res) -> scanAt(req));
     }
 
 
@@ -73,19 +72,5 @@ public class Main {
 
     }
 
-    private static String scanAt(Request req) {
-
-        BattleshipModel currModel = getModelFromReq(req);
-        String row = req.params("row");
-        String col = req.params("col");
-        int rowInt = Integer.parseInt(row);
-        int colInt = Integer.parseInt(col);
-
-        currModel.scanAt(rowInt, colInt);
-
-        Gson gson = new Gson();
-        return gson.toJson(currModel);
-
-    }
 
 }
