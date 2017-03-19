@@ -1,5 +1,6 @@
 package edu.oregonstate.cs361.battleship;
 
+import edu.oregonstate.cs361.battleship.ship.AircraftCarrier;
 import edu.oregonstate.cs361.battleship.ship.BaseShip;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +41,7 @@ class BattleshipModelTest {
         BaseShip dinghy  = base.getShip(three);
         dinghy.setLocation(st,en);
         assertEquals(dinghy,testThree);
-        
+
         String four = "clipper";
         Coordinate ST = new Coordinate(4,1);
         Coordinate EN = new Coordinate(4,3);
@@ -65,6 +66,7 @@ class BattleshipModelTest {
 
     @Test
     void placeShip() {
+        System.out.println("Test Place ship");
         BattleshipModel base = new BattleshipModel();
         String two = "aircraftcarrier";
         base = base.placeShip(two,"1","1","horizontal",base);
@@ -87,32 +89,39 @@ class BattleshipModelTest {
         base = base.placeShip(four,"4","1","vertical",base);
         base = base.placeShip(five,"5","1","vertical",base);
 
-    }
 
+        BattleshipModel testMode = new BattleshipModel();
+        testMode.difficulty = Difficulty.HARD;
+        testMode = testMode.placeShip(one,"2","1","vertical",testMode);
+
+
+    }
+    @Test
+    void randomPlace(){
+        int length = 5;
+        BattleshipModel base = new BattleshipModel();
+        base.randomPlace(length, 0);
+        base.randomPlace(length, 1);
+        base.placeShip("aircraftcarrier","1","1","vertical",base);
+        for(int i = 0; i < 10; i++) {
+            base.randomPlace(length, 0);
+            base.randomPlace(length, 1);
+        }
+    }
     @Test
     void shootAtComputer() {
         BattleshipModel Test = new BattleshipModel();
         Test.shootAtComputer(3,4);
         Test.shootAtComputer(2,2);
-
-    }
-
-    @Test
-    void scanAt() {
-        BattleshipModel Test = new BattleshipModel();
-        Test.scanAt(3,4);
-        Test.scanAt(7,4);
-        Test.scanAt(6,4);
-        Test.scanAt(8,8);
-
     }
 
     @Test
     void shootAtPlayer() {
         BattleshipModel Test = new BattleshipModel();
         Test.shootAtPlayer();
-        
-
+        BattleshipModel testMode = new BattleshipModel();
+        testMode.difficulty = Difficulty.HARD;
+        testMode.shootAtPlayer();
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.google.gson.annotations.SerializedName;
 import edu.oregonstate.cs361.battleship.ship.AircraftCarrier;
 import edu.oregonstate.cs361.battleship.ship.BaseShip;
 import edu.oregonstate.cs361.battleship.ship.Battleship;
@@ -14,6 +15,9 @@ import edu.oregonstate.cs361.battleship.strategy.CleverStrategy;
 import edu.oregonstate.cs361.battleship.strategy.NormalStrategy;
 import edu.oregonstate.cs361.battleship.strategy.Strategy;
 
+/**
+ * Created by michaelhilton on 1/4/17.
+ */
 public class BattleshipModel {
 
     private AircraftCarrier aircraftCarrier = new AircraftCarrier(new Coordinate(0, 0), new Coordinate(0, 0));
@@ -32,19 +36,15 @@ public class BattleshipModel {
     private ArrayList<Coordinate> playerMisses;
     private ArrayList<Coordinate> computerHits;
     private ArrayList<Coordinate> computerMisses;
-    
-    private Difficulty difficulty = Difficulty.EASY;
 
-    private int testing = 0;        //test
+    public Difficulty difficulty = Difficulty.EASY;
+
     public BattleshipModel() {
         playerHits = new ArrayList<>();
         playerMisses= new ArrayList<>();
         computerHits = new ArrayList<>();
         computerMisses= new ArrayList<>();
 
-        Random rand = new Random();
-        testing = rand.nextInt(10) + 1;        //1~10
-        //System.out.println("in battleshipmodel " + testing);
     }
 
     public BaseShip getShip(String shipName) {
@@ -94,9 +94,6 @@ public class BattleshipModel {
         }
 
 
-
-        System.out.println("test");
-
         if ((difficulty == Difficulty.EASY) && (computer_aircraftCarrier.getStart().getAcross() == 0)) {
             System.out.println("easy mode");
             computer_aircraftCarrier = new AircraftCarrier(new Coordinate(2, 2), new Coordinate(2, 7));
@@ -144,7 +141,8 @@ public class BattleshipModel {
             down = randPlace.getDown();
             if(dir == 0) {
                 computer_clipper = new Clipper(new Coordinate(across, down), new Coordinate(across+2, down));
-            } else{
+            }
+            else{
                 computer_clipper = new Clipper(new Coordinate(across, down), new Coordinate(across, down+2));
             }
 
@@ -154,16 +152,18 @@ public class BattleshipModel {
             down = randPlace.getDown();
             if(dir == 0) {
                 computer_dinghy = new Dinghy(new Coordinate(across, down), new Coordinate(across, down));
-            } else{
+            }
+            else{
                 computer_dinghy = new Dinghy(new Coordinate(across, down), new Coordinate(across, down));
             }
         }
+        /*
         System.out.println("computer_aircraftCarrier = " + computer_aircraftCarrier.getStart() + " " + computer_aircraftCarrier.getEnd());
         System.out.println("computer_battleship = " + computer_battleship.getStart() + " " + computer_battleship.getEnd());
         System.out.println("computer_submarine = " + computer_submarine.getStart() + " " + computer_submarine.getEnd());
         System.out.println("computer_clipper = " + computer_clipper.getStart() + " " + computer_clipper.getEnd());
         System.out.println("computer_dinghy = " + computer_dinghy.getStart() + " " + computer_dinghy.getEnd());
-
+        */
 
         return currModel;
     }
@@ -228,7 +228,7 @@ public class BattleshipModel {
 
         Coordinate coor = new Coordinate(row,col);
 
-        List<Coordinate> covers = new ArrayList<>(); 
+        List<Coordinate> covers = new ArrayList<>();
         covers.addAll(computer_aircraftCarrier.covers(coor));
         covers.addAll(computer_battleship.covers(coor));
         covers.addAll(computer_dinghy.covers(coor));
@@ -242,33 +242,33 @@ public class BattleshipModel {
             computerHits.addAll(covers);
         }
 
+        /*
         for (Coordinate number : computerHits) {
             System.out.println("computerHits = " + number);
         }
-
         for (Coordinate number : computerMisses) {
             System.out.println("computerMisses = " + number);
         }
-
+        */
 
     }
 
 
 
     public void shootAtPlayer() {
-    	
-    	Strategy strategy;
-    	if (difficulty == Difficulty.EASY) {
-    		strategy = new NormalStrategy();
-    	} else if (difficulty == Difficulty.HARD) {
-    		strategy = new CleverStrategy();
-    	} else {
-    		throw new RuntimeException("difficulty should be easy or hard!");
-    	}
-    	
-    	Coordinate coor = strategy.shootAtPlayer(playerMisses, playerHits);
 
-        List<Coordinate> covers = new ArrayList<>(); 
+        Strategy strategy;
+        if (difficulty == Difficulty.EASY) {
+            strategy = new NormalStrategy();
+        } else if (difficulty == Difficulty.HARD) {
+            strategy = new CleverStrategy();
+        } else {
+            throw new RuntimeException("difficulty should be easy or hard!");
+        }
+
+        Coordinate coor = strategy.shootAtPlayer(playerMisses, playerHits);
+
+        List<Coordinate> covers = new ArrayList<>();
         covers.addAll(aircraftCarrier.covers(coor));
         covers.addAll(battleship.covers(coor));
         covers.addAll(dinghy.covers(coor));
