@@ -89,8 +89,7 @@ class BattleshipModelTest {
         base = base.placeShip(four,"4","1","vertical",base);
         base = base.placeShip(five,"5","1","vertical",base);
 
-        //就是就算我在這裡換了 difficulty 當測試到place ship裡面的時候 永遠都是 difficulty in easy
-        //好像是因為真正在difficult 上面的操作是要在js裡面完成 可是這樣就測試不到
+
         BattleshipModel testMode = new BattleshipModel();
         testMode.difficulty = Difficulty.HARD;
         testMode = testMode.placeShip(one,"2","1","vertical",testMode);
