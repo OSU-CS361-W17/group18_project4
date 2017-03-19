@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.google.gson.annotations.SerializedName;
 import edu.oregonstate.cs361.battleship.ship.AircraftCarrier;
 import edu.oregonstate.cs361.battleship.ship.BaseShip;
 import edu.oregonstate.cs361.battleship.ship.Battleship;
@@ -14,6 +15,9 @@ import edu.oregonstate.cs361.battleship.strategy.CleverStrategy;
 import edu.oregonstate.cs361.battleship.strategy.NormalStrategy;
 import edu.oregonstate.cs361.battleship.strategy.Strategy;
 
+/**
+ * Created by michaelhilton on 1/4/17.
+ */
 public class BattleshipModel {
 
     private AircraftCarrier aircraftCarrier = new AircraftCarrier(new Coordinate(0, 0), new Coordinate(0, 0));
@@ -33,18 +37,14 @@ public class BattleshipModel {
     private ArrayList<Coordinate> computerHits;
     private ArrayList<Coordinate> computerMisses;
     
-    private Difficulty difficulty = Difficulty.EASY;
+    public Difficulty difficulty = Difficulty.EASY;
 
-    private int testing = 0;        //test
     public BattleshipModel() {
         playerHits = new ArrayList<>();
         playerMisses= new ArrayList<>();
         computerHits = new ArrayList<>();
         computerMisses= new ArrayList<>();
 
-        Random rand = new Random();
-        testing = rand.nextInt(10) + 1;        //1~10
-        //System.out.println("in battleshipmodel " + testing);
     }
 
     public BaseShip getShip(String shipName) {
@@ -93,9 +93,6 @@ public class BattleshipModel {
             }
         }
 
-
-
-        System.out.println("test");
 
         if ((difficulty == Difficulty.EASY) && (computer_aircraftCarrier.getStart().getAcross() == 0)) {
             System.out.println("easy mode");
@@ -158,12 +155,13 @@ public class BattleshipModel {
                 computer_dinghy = new Dinghy(new Coordinate(across, down), new Coordinate(across, down));
             }
         }
+        /*
         System.out.println("computer_aircraftCarrier = " + computer_aircraftCarrier.getStart() + " " + computer_aircraftCarrier.getEnd());
         System.out.println("computer_battleship = " + computer_battleship.getStart() + " " + computer_battleship.getEnd());
         System.out.println("computer_submarine = " + computer_submarine.getStart() + " " + computer_submarine.getEnd());
         System.out.println("computer_clipper = " + computer_clipper.getStart() + " " + computer_clipper.getEnd());
         System.out.println("computer_dinghy = " + computer_dinghy.getStart() + " " + computer_dinghy.getEnd());
-
+        */
 
         return currModel;
     }
@@ -242,14 +240,14 @@ public class BattleshipModel {
             computerHits.addAll(covers);
         }
 
+        /*
         for (Coordinate number : computerHits) {
             System.out.println("computerHits = " + number);
         }
-
         for (Coordinate number : computerMisses) {
             System.out.println("computerMisses = " + number);
         }
-
+        */
 
     }
 
